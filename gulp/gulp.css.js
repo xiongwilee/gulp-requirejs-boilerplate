@@ -26,7 +26,7 @@ function gulpCss() {
   let copyFilter = filter(['**/*', '!' + maniImagePath]);
 
   // 配置当前路径为文件app路径， 参考：https://github.com/gulpjs/vinyl#optionscwd
-  return gulp.src(cfg.appPath + cfg.src.css, { cwd: path.resolve(cfg.path.app) })
+  return gulp.src(cfg.src.css, { cwd: path.resolve(cfg.path.app) })
     .pipe(cssFilter)
     .pipe(gulpif(cfg.options.isProduction, revCollector()))
     .pipe(less())

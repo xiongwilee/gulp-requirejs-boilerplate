@@ -31,16 +31,14 @@ function gulpJavascript() {
   let jsFilter = filter(['**/*.js', '!**/*.min.js', '!**/*-min.js'].concat(cfg.filter.js), { restore: true });
   let requireFilter = filter(['**/*.js'].concat(cfg.filter.require), { restore: true });
   let jsLibFilter = filter(['**/*.js'], { restore: true });
-
+  
   // manifest路径
   let manifestPath = cfg.options.mod + 'static/js/' + cfg.src.manifest;
-
-  let curTask;
 
   // 如果有require配置，则通过gulp-requirejs-optimize打包
   // 否则不用做任何处理
   if (modRequireCfg && cfg.options.isProduction) {
-    return gulp.src(cfg.appPath + cfg.src.js, { cwd: path.resolve(cfg.path.app) })
+    return gulp.src(cfg.src.js, { cwd: path.resolve(cfg.path.app) })
       // .pipe(plumber())
       .pipe(requireFilter)
       .pipe(requirejsOptimize(function(file) {
@@ -64,7 +62,7 @@ function gulpJavascript() {
       .pipe(cfg.gulpManifestAddMod('js'))
       .pipe(gulp.dest(distPath));
   } else {
-    return gulp.src(cfg.appPath + cfg.src.js, { cwd: path.resolve(cfg.path.app) })
+    return gulp.src(cfg.src.js, { cwd: path.resolve(cfg.path.app) })
       // .pipe(plumber())
       // 排除不需要压缩的文件
       .pipe(jsFilter)

@@ -12,7 +12,9 @@ let _path = exports.path = {
   app: '../app/',
   app_absolute: path.resolve('../app/'),
   dist: '../server/app',
-  dist_absolute: path.resolve('../server/app')
+  dist_absolute: path.resolve('../server/app'),
+  require: 'common/static/js/lib/require.js',
+  requireConfig: 'static/js/require.config.js'
 }
 
 /* 获取命令行参数 */
@@ -50,6 +52,7 @@ exports.filter = Object.assign({}, {
   css: ['!wallet/static/css/vux.css'],
   js: [],
   image: [],
+  require: [],
   copy: []
 }, modOption.filter);
 

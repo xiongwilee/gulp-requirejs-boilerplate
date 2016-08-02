@@ -20,13 +20,12 @@ const filter = require('gulp-filter');
 function gulpHtml() {
   let distPath = cfg.distPath + 'views';
   let manifestPath = cfg.path.dist + '/*/static/*/' + cfg.src.manifest,
-    htmlPath = cfg.appPath + cfg.src.views;
+    htmlPath = cfg.src.views;
 
   let jsFilter = filter(['**/*.js'], { restore: true });
   let jsManifestPath = cfg.distPath + 'static/js/rev-manifest.json';
   let htmlFilter = filter(['**/*.html'], { restore: true });
 
-  let curTask;
   if (cfg.options.isProduction) {
     return gulp.src([manifestPath, htmlPath], { cwd: path.resolve(cfg.path.app)})
       .pipe(htmlFilter)
