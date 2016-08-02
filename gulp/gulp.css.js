@@ -8,7 +8,7 @@ const gulpif = require('gulp-if');
 const rev = require('gulp-rev');
 const revCollector = require('gulp-rev-collector');
 const less = require('gulp-less');
-const minifyCSS = require('gulp-minify-css');
+const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
 const plumber = require('gulp-plumber');
 const filter = require('gulp-filter');
@@ -31,7 +31,7 @@ function gulpCss() {
     .pipe(gulpif(cfg.options.isProduction, revCollector()))
     .pipe(less())
     .pipe(gulpif(cfg.options.isProduction, autoprefixer({ browsers: cfg.autoPrefixBrowserList })))
-    .pipe(gulpif(cfg.options.isProduction, minifyCSS()))
+    .pipe(gulpif(cfg.options.isProduction, cleanCSS()))
     .pipe(cssFilter.restore)
     // 其他文件直接被拷贝过去即可
     .pipe(copyFilter)

@@ -8,7 +8,7 @@ const gulpif = require('gulp-if');
 const rev = require('gulp-rev');
 const plumber = require('gulp-plumber');
 const filter = require('gulp-filter');
-const imagemin = require('gulp-imagemin');
+// const imagemin = require('gulp-imagemin');
 
 /**
  * 编译html

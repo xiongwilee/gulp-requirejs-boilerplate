@@ -11,26 +11,17 @@
     "url": "git+https://github.com/koa-grace/koa-grace-cli.git"
   },
   "keywords": [
-    "koa",
-    "koa-grace",
-    "koa-grace-cli"
+    "gulp",
+    "requirejs",
+    "optimize"
   ],
-  "bin": {
-    "grace": "bin/koa-grace-dev",
-    "gtest": "bin/koa-grace-test",
-    "gonline": "bin/koa-grace-online",
-    "koa-grace": "bin/koa-grace"
-  },
   "author": "wilee",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/koa-grace/koa-grace-cli/issues"
   },
   "homepage": "https://github.com/koa-grace/koa-grace-cli#readme",
   "dependencies": {
-    "chalk": "^1.1.3",
-    "commander": "^2.9.0",
-    "shelljs": "^0.7.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -42,9 +33,8 @@
     "gulp-gunzip": "0.0.3",
     "gulp-gzip": "^1.2.0",
     "gulp-if": "^2.0.0",
-    "gulp-imagemin": "^2.4.0",
     "gulp-less": "^3.0.5",
-    "gulp-minify-css": "^1.2.4",
+    "gulp-clean-css": "^2.0.12",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-requirejs-optimize": "^0.3.2",
