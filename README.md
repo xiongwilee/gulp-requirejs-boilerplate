@@ -3,6 +3,7 @@
 基于gulp的requirejs+less的基本构建方案
 
 ## 一、特性
+* 基于gulp+requirejs+less的多应用构建支持
 * JavaScript/CSS资源合并压缩
 * 支持HTML中静态资源MD5戳自动替换
 * 支持tar.gz格式压缩打包/解压缩

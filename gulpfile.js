@@ -40,7 +40,7 @@ gulp.task('build:copy', () => gulpCopy());
  *       gulp build  --mod=doc  编译doc模块
  *       gulp build  --env=production  线上编译模式，包括压缩、合并等操作
  */
-gulp.task('build', gulpSequence('build:image', 'build:css', 'build:js', ['build:html', 'build:copy']));
+gulp.task('build', gulpSequence('clean','build:image', 'build:css', 'build:js', ['build:html', 'build:copy']));
 
 
 /**

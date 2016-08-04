@@ -9,9 +9,9 @@ const through = require('through2');
 
 /* 文件路径 */
 let _path = exports.path = {
-  app: '../app/',
+  app: './',
   app_absolute: path.resolve('../app/'),
-  dist: '../server/app',
+  dist: './dist',
   dist_absolute: path.resolve('../server/app'),
   require: 'common/static/js/lib/require.js',
   requireConfig: 'static/js/require.config.js'
@@ -37,14 +37,9 @@ exports.src = Object.assign({}, {
   css: `${appPath}static/css/**/*`,
   image: `${appPath}static/image/**/*`,
   copy: [
-    `${appPath}static/*`,
-    `${appPath}model/**/*.js`,
-    `${appPath}controller/**/*.js`,
-    `${appPath}mock/**/*`,
-    `${appPath}deploy/**/*`,
-    `${appPath}build/**/*`
+    `${appPath}static/*`
   ],
-  manifest: `${appPath}**/rev-manifest.json`
+  manifest: `${distPath}**/rev-manifest.json`
 }, modOption.src);
 
 /* 文件编译过滤器，把不需要编译的文件添加到这里 */
@@ -62,7 +57,7 @@ exports.filter = Object.assign({}, {
 exports.gulpManifestAddMod = function(filetype) {
   return through.obj(function(file, enc, callback) {
     let fileContent = file.contents.toString('UTF-8');
-    fileContent = fileContent.replace(/(\")([a-zA-Z0-9\-\_]{1,})/g, '$1/' + options.mod +'static/'+ filetype + '/$2');
+    fileContent = fileContent.replace(/(\")([a-zA-Z0-9\-\_]{1,})/g, '$1/' + options.mod +'/static/'+ filetype + '/$2');
     file.contents = new Buffer(fileContent);
     callback(null, file);
   }, function(cb) {
