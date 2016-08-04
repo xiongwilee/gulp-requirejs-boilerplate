@@ -70,9 +70,9 @@ Options:
 
 ### 配置说明
 
-详细配置模块请参看：`gulp/gulp.config.js`
+**全局path配置**
 
-**path**
+详细配置模块请参看：`gulp/gulp.config.js`
 
 ```
 exports.path = {
@@ -81,6 +81,8 @@ exports.path = {
   requireConfig: 'static/js/require.config.js'  // reqirejs配置文件路径
 }
 ```
+
+**应用独立配置**
 
 另外你可以在你的业务模块的`build/gulp.options.js`中自行配置独立的`src`,`filter`配置，请参考：`example/build/gulp.options.js`
 ```
@@ -101,7 +103,7 @@ exports.filter = {
 ```
 
 
-## 五、TODO
+## 三、TODO
 * CSS保存时报错忽略
 * 开发环境模式下也产出了时间戳文件
 * 自动图片精灵处理
