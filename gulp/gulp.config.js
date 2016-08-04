@@ -9,12 +9,9 @@ const through = require('through2');
 
 /* 文件路径 */
 let _path = exports.path = {
-  app: './',
-  app_absolute: path.resolve('../app/'),
-  dist: './dist',
-  dist_absolute: path.resolve('../server/app'),
-  require: 'common/static/js/lib/require.js',
-  requireConfig: 'static/js/require.config.js'
+  app: './',                                    // 应用业务代码路径
+  dist: './dist',                               // 产出文件路径
+  requireConfig: 'static/js/require.config.js'  // reqirejs配置文件路径
 }
 
 /* 获取命令行参数 */
@@ -32,19 +29,19 @@ exports.autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', '
 
 /* src路径 */
 exports.src = Object.assign({}, {
-  views: `${appPath}views/**/*.html`,
-  js: `${appPath}static/js/**/*.js`,
-  css: `${appPath}static/css/**/*`,
-  image: `${appPath}static/image/**/*`,
+  views: `${appPath}views/**/*.html`,         // views泛路径
+  js: `${appPath}static/js/**/*.js`,          // js文件泛路径
+  css: `${appPath}static/css/**/*`,           // css文件泛路径
+  image: `${appPath}static/image/**/*`,       // 图片泛路径
   copy: [
-    `${appPath}static/*`
+    `${appPath}static/*`                      // 需要拷贝的文件泛路径
   ],
-  manifest: `${distPath}**/rev-manifest.json`
+  manifest: `${distPath}**/rev-manifest.json` // 隐射文件泛路径，注意是在distPath路径下
 }, modOption.src);
 
 /* 文件编译过滤器，把不需要编译的文件添加到这里 */
 exports.filter = Object.assign({}, {
-  css: ['!wallet/static/css/vux.css'],
+  css: ['!example/static/css/test.css'],
   js: [],
   image: [],
   require: [],

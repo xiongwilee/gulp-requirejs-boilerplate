@@ -2,7 +2,7 @@
 
 基于gulp+requirejs+less的多应用构建方案
 
-## 一、入门
+## 一、Getting Started
 
 ### 适用场景
 
@@ -14,11 +14,13 @@
 * 基于gulp+requirejs+less的多应用构建支持
 * JavaScript/CSS资源合并压缩
 * 支持HTML中静态资源MD5戳自动替换
-* 支持tar.gz格式压缩打包/解压缩
+* HTML中静态资源combo模式合并
 
 
-### Getting Started
+### 示例
+
 ![gulp-requirejs-boilerplate.gif](https://raw.githubusercontent.com/xiongwilee/demo/master/photo/gulp-requirejs-boilerplate.gif)
+
 下载gulp代码及编译工具
 
 ```
@@ -39,26 +41,64 @@ $ gulp build --env=production --mod=example
 ```
 $ cd dist && static-server
 ```
-然后用浏览器访问： http://localhost:9080/example/views/index.html 
+然后用浏览器访问： [http://localhost:9080/example/views/index.html](http://localhost:9080/example/views/index.html)
 
 ## 二、使用方法
 
-****
+### 任务说明
 
-**监听模式**
+```
+Usage: gulp [task] --env=[producition|development] --mod=[应用名]
 
-**tar.gz格式打包**
+Example: gulp build --env=production --mod=example
 
-**清空目录**
+Tasks: 
+    watch                               监听模式启动build任务
+    build                               整体编译
+    build:clean                         清空产出目录
+
+    build:js                            仅仅编译js文件
+    build:css                           仅仅编译css文件
+    build:image                         仅仅编译image文件
+    build:html                          仅仅编译html文件
+    build:copy                          拷贝资源到dist目录
+
+Options:
+    --env                               当前的环境变量，可选：production|development,默认:development
+    --mod                               当前要编译的应用名称，必填
+```
 
 ### 配置说明
 
+详细配置模块请参看：`gulp/gulp.config.js`
+
 **path**
 
-**src**
+```
+exports.path = {
+  app: './',                                    // 应用业务代码路径
+  dist: './dist',                               // 产出文件路径
+  requireConfig: 'static/js/require.config.js'  // reqirejs配置文件路径
+}
+```
 
-**filter**
+另外你可以在你的业务模块的`build/gulp.options.js`中自行配置独立的`src`,`filter`配置，请参考：`example/build/gulp.options.js`
+```
+/**
+ * 业务模块gulp独立配置文件
+ */
 
+// 需要操作的文件
+exports.src = {
+  copy: ['example/build/*']
+}
+
+// 不需要编译的文件
+exports.filter = {
+  js: [],
+  css: ['!example/static/css/lib/reset.css']
+}
+```
 
 
 ## 五、TODO
