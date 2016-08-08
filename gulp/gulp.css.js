@@ -25,21 +25,34 @@ function gulpCss() {
   // 因为为了替换CSS中的imagew文件，在src中添加了maniImagePath，所以在这里把图片文件排除
   let copyFilter = filter(['**/*', '!' + maniImagePath]);
 
-  // 配置当前路径为文件app路径， 参考：https://github.com/gulpjs/vinyl#optionscwd
-  return gulp.src(cfg.src.css, { cwd: cfg.path.cwd , base: cfg.path.base })
-    .pipe(cssFilter)
-    .pipe(gulpif(cfg.options.isProduction, revCollector()))
-    .pipe(less())
-    .pipe(gulpif(cfg.options.isProduction, autoprefixer({ browsers: cfg.autoPrefixBrowserList })))
-    .pipe(gulpif(cfg.options.isProduction, cleanCSS()))
-    .pipe(cssFilter.restore)
-    // 其他文件直接被拷贝过去即可
-    .pipe(copyFilter)
-    .pipe(gulp.dest(cfg.path.dist))
-    .pipe(rev())
-    .pipe(gulp.dest(cfg.path.dist))
-    .pipe(rev.manifest())
-    .pipe(gulp.dest(distPath));
+  if (cfg.options.isProduction) {
+    // 配置当前路径为文件app路径， 参考：https://github.com/gulpjs/vinyl#optionscwd
+    return gulp.src(cfg.src.css, { cwd: cfg.path.cwd , base: cfg.path.base })
+      .pipe(cssFilter)
+      .pipe(revCollector())
+      .pipe(less())
+      .pipe(autoprefixer({ browsers: cfg.autoPrefixBrowserList }))
+      .pipe(cleanCSS())
+      .pipe(cssFilter.restore)
+      // 其他文件直接被拷贝过去即可
+      .pipe(copyFilter)
+      .pipe(gulp.dest(cfg.path.dist))
+      .pipe(rev())
+      .pipe(gulp.dest(cfg.path.dist))
+      .pipe(rev.manifest())
+      .pipe(gulp.dest(distPath));
+  }else{
+    // 配置当前路径为文件app路径， 参考：https://github.com/gulpjs/vinyl#optionscwd
+    return gulp.src(cfg.src.css, { cwd: cfg.path.cwd , base: cfg.path.base })
+      .pipe(plumber())
+      .pipe(cssFilter)
+      .pipe(less())
+      .pipe(cssFilter.restore)
+      // 其他文件直接被拷贝过去即可
+      .pipe(copyFilter)
+      .pipe(gulp.dest(cfg.path.dist));
+
+  }
 }
 
 module.exports = gulpCss;
