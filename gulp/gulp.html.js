@@ -18,8 +18,7 @@ const filter = require('gulp-filter');
  * @return
  */
 function gulpHtml() {
-  let distPath = cfg.distPath + 'views';
-  let manifestPath = cfg.src.manifest,
+  let manifestPath = path.resolve(cfg.src.manifest),
     htmlPath = cfg.src.views;
 
   let jsFilter = filter(['**/*.js'], { restore: true });
@@ -27,11 +26,12 @@ function gulpHtml() {
   let htmlFilter = filter(['**/*.html'], { restore: true });
   
   if (cfg.options.isProduction) {
-    return gulp.src([manifestPath, htmlPath], { cwd: path.resolve(cfg.path.app)})
+    return gulp.src([manifestPath, htmlPath], { cwd: cfg.path.cwd , base: cfg.path.base })
+      // .pipe(cfg.readStream(true))
       .pipe(htmlFilter)
       .pipe(useref({
         base: '.',
-        searchPath: cfg.path.dist
+        searchPath: path.resolve(cfg.path.dist)
       }))
       .pipe(jsFilter)
       .pipe(gulp.dest(cfg.path.dist))
@@ -42,10 +42,10 @@ function gulpHtml() {
       .pipe(jsFilter.restore)
       .pipe(htmlFilter.restore)
       .pipe(revCollector())
-      .pipe(gulp.dest(distPath));
+      .pipe(gulp.dest(cfg.path.dist));
   } else {
-    return gulp.src(htmlPath, { cwd: path.resolve(cfg.path.app)})
-      .pipe(gulp.dest(distPath));
+    return gulp.src(htmlPath, { cwd: cfg.path.cwd , base: cfg.path.base })
+      .pipe(gulp.dest(cfg.path.dist));
   }
 }
 

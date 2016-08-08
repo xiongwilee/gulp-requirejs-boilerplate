@@ -18,7 +18,7 @@ function gulpImage() {
   let manifestPath = cfg.distPath + 'static/image/';
   let imageFilter = filter(['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif'].concat(cfg.filter.image), { restore: true });
 
-  return gulp.src(cfg.src.image, { cwd: path.resolve(cfg.path.app), base: '.' })
+  return gulp.src(cfg.src.image, { cwd: cfg.path.cwd , base: cfg.path.base })
     // .pipe(imageFilter)
     // .pipe(gulpif(cfg.options.isProduction,imagemin()))
     // .pipe(imageFilter.restore)
@@ -26,7 +26,6 @@ function gulpImage() {
     .pipe(rev())
     .pipe(gulp.dest(cfg.path.dist))
     .pipe(rev.manifest())
-    // .pipe(cfg.gulpManifestAddMod('image'))
     .pipe(gulp.dest(manifestPath));
 }
 

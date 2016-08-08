@@ -9,8 +9,10 @@ const through = require('through2');
 
 /* 文件路径 */
 let _path = exports.path = {
-  app: './',                                    // 应用业务代码路径
-  dist: './dist',                               // 产出文件路径
+  app: './',                                    // 应用业务代码路径，相对于path.cwd的路径
+  dist: './dist/',                    // 产出文件路径
+  cwd: path.resolve('./'),                     // 
+  base: path.resolve('./'),
   requireConfig: 'static/js/require.config.js'  // reqirejs配置文件路径
 }
 
@@ -18,8 +20,8 @@ let _path = exports.path = {
 let options = exports.options = getArgv();
 
 // 获取基本路径
-let appPath = exports.appPath = _path.app + options.mod + '/';
-let distPath = exports.distPath = _path.dist + '/' + options.mod + '/';
+let appPath = exports.appPath =  _path.app + options.mod + '/';
+let distPath = exports.distPath = _path.dist + options.mod + '/';
 
 /* 获取对应模块下的配置 */
 let modOption = exports.modOption = getModoption();
@@ -33,8 +35,12 @@ exports.src = Object.assign({}, {
   js: `${appPath}static/js/**/*.js`,          // js文件泛路径
   css: `${appPath}static/css/**/*`,           // css文件泛路径
   image: `${appPath}static/image/**/*`,       // 图片泛路径
-  copy: [
-    `${appPath}static/*`                      // 需要拷贝的文件泛路径
+  copy: [                                     // 需要拷贝的文件泛路径
+    `${appPath}controller/**/*`,
+    `${appPath}deploy/**/*`,
+    `${appPath}mock/**/*`,
+    `${appPath}model/**/*`,
+    `${appPath}static/*`
   ],
   manifest: `${distPath}**/rev-manifest.json` // 隐射文件泛路径，注意是在distPath路径下
 }, modOption.src);
@@ -80,10 +86,10 @@ function getModoption() {
  * 输出gulp stream 中文件信息
  * @return {Obejct}
  */
-exports.readStream = function() {
+exports.readStream = function(showContents) {
   return through.obj((file, enc, callback) => {
-    console.log('base:' + file.base, 'cwd:' + file.cwd, 'path:' + file.path, 'relative:' + file.relative);
-    // console.log(file.contents.toString('UTF-8'))
+    console.log('base:' + file.base, '\n', 'cwd:' + file.cwd, '\n', 'path:' + file.path, '\n', 'relative:' + file.relative);
+    showContents && console.log(file.contents.toString('UTF-8'))
     callback(null, file);
   }, (cb) => cb())
 }

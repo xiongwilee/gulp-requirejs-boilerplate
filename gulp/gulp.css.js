@@ -26,7 +26,7 @@ function gulpCss() {
   let copyFilter = filter(['**/*', '!' + maniImagePath]);
 
   // 配置当前路径为文件app路径， 参考：https://github.com/gulpjs/vinyl#optionscwd
-  return gulp.src(cfg.src.css, { cwd: path.resolve(cfg.path.app) })
+  return gulp.src(cfg.src.css, { cwd: cfg.path.cwd , base: cfg.path.base })
     .pipe(cssFilter)
     .pipe(gulpif(cfg.options.isProduction, revCollector()))
     .pipe(less())
@@ -35,11 +35,10 @@ function gulpCss() {
     .pipe(cssFilter.restore)
     // 其他文件直接被拷贝过去即可
     .pipe(copyFilter)
-    .pipe(gulp.dest(distPath))
+    .pipe(gulp.dest(cfg.path.dist))
     .pipe(rev())
-    .pipe(gulp.dest(distPath))
+    .pipe(gulp.dest(cfg.path.dist))
     .pipe(rev.manifest())
-    .pipe(cfg.gulpManifestAddMod('css'))
     .pipe(gulp.dest(distPath));
 }
 

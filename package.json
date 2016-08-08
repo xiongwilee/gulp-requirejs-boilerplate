@@ -4,7 +4,8 @@
   "description": "koa-grace-cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp watch --mod=example",
+    "build": "gulp build --mod=example --env=production"
   },
   "repository": {
     "type": "git",
