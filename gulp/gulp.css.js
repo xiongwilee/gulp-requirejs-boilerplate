@@ -44,7 +44,10 @@ function gulpCss() {
   }else{
     // 配置当前路径为文件app路径， 参考：https://github.com/gulpjs/vinyl#optionscwd
     return gulp.src(cfg.src.css, { cwd: cfg.path.cwd , base: cfg.path.base })
-      .pipe(plumber())
+      .pipe(plumber(function (error) {
+        console.log(error);
+        this.emit('end');
+      }))
       .pipe(cssFilter)
       .pipe(less())
       .pipe(cssFilter.restore)

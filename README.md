@@ -104,7 +104,6 @@ exports.filter = {
 
 
 ## 三、TODO
-* CSS保存时报错忽略
 * 自动图片精灵处理
 
 
