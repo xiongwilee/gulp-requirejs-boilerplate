@@ -51,9 +51,9 @@ gulp.task('build', gulpSequence('clean','build:image', 'build:css', 'build:js', 
  *       gulp watch  --env=production  线上监听编译模式，包括压缩、合并等操作
  */
 gulp.task('watch', ['build'], function() {
-  gulp.watch([cfg.src.js], ['build:js']);
-  gulp.watch([cfg.src.image], ['build:image']);
-  gulp.watch([cfg.src.css], ['build:css']);
-  gulp.watch([cfg.src.views], ['build:html']);
-  gulp.watch(cfg.src.copy, ['build:copy'])
+  gulp.watch([cfg.src.js], { cwd: cfg.path.cwd } ,['build:js']);
+  gulp.watch([cfg.src.image], { cwd: cfg.path.cwd } ,['build:image']);
+  gulp.watch([cfg.src.css], { cwd: cfg.path.cwd } ,['build:css']);
+  gulp.watch([cfg.src.views], { cwd: cfg.path.cwd } ,['build:html']);
+  gulp.watch(cfg.src.copy, { cwd: cfg.path.cwd } ,['build:copy'])
 });
