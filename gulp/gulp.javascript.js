@@ -104,6 +104,17 @@ function getRequireCfg() {
   // 调整baseUrl
   result.baseUrl = path.resolve(cfg.path.app) + result.baseUrl;
 
+  // 调整map
+  for(let key in result.map){
+    let mapItem = result.map[key];
+    if (typeof mapItem === 'object') {
+      for(let subKey in mapItem){
+        let subItem = mapItem[subKey];
+        result.map[key][subKey] = subItem.replace(/^\//,'');
+      }
+    }
+  }
+
   return result;
 }
 
