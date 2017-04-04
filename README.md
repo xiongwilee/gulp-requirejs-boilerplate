@@ -19,7 +19,7 @@
 
 ### 示例
 
-![gulp-requirejs-boilerplate.gif](https://raw.githubusercontent.com/xiongwilee/demo/master/photo/gulp-requirejs-boilerplate.gif)
+![gulp-requirejs-boilerplate.gif](https://raw.githubusercontent.com/xiongwilee/demo/master/photo/gulp-requirejs-boilerplate.gif?test)
 
 下载gulp代码及编译工具
 
